@@ -140,11 +140,20 @@ namespace ns_protocol
         {
             return inbuffer;
         }
+        else if(s == 0){
+            std::cout << "client quit！" << std::endl; 
+        }else{
+            std::cout << "recv error！" << std::endl;
+        }
+        return "";
     }
 
     // 在协议中规定数据在网络中发送的方式【临时版】
     void Send(int sock, const std::string str)
     {
-        send(sock, str.c_str(), str.size(), 0);
+        std::cout << "send in" << std::endl;
+        int n = send(sock, str.c_str(), str.size(), 0);
+        if( n < 0) std::cout << "send error！" << std::endl;
+        (void)n;
     }
 }

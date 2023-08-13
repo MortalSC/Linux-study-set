@@ -35,6 +35,7 @@ namespace Mortal_TcpServer
             // 执行方法
             td->_server->Execute(td->_sock);
             close(td->_sock);       // 具体看功能场景
+            
             delete td;
         }
 

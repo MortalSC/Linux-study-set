@@ -31,7 +31,22 @@ int main(int argc, char *argv[])
 
     while (true)
     {
-        Request req(10, 20, '+');
+        // Request req(10, 20, '+');
+
+        // 引入简单交互
+        Request req;
+        std::cout << "Please Enter x > ";
+        std::cin >> req._x;
+        std::cout << "Please Enter y > ";
+        std::cin >> req._y;
+
+        std::cout << "Please Enter op [+、-、*、/、%] > ";
+        std::cin >> req._op;
+
+
+
+
+
         std::string str = req.Serialize();
         Send(sockfd, str);
 
