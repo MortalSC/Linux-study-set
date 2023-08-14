@@ -1,5 +1,6 @@
 #include "TcpServer.hpp"
 #include "Protocol.hpp"
+#include "Deamon.hpp"
 #include <memory>
 #include <signal.h>
 
@@ -70,8 +71,6 @@ void Calaculator(int sock)
         if (!res)
             break; // 检查数据是否读取成功！
 
-
-
         // 调试参考输出:
         // std::cout << "Calaculator[func] read inbuffer > " << inbuffer << std::endl;
 
@@ -79,11 +78,9 @@ void Calaculator(int sock)
         // 优化协议的新增要求：一定要保证读取到一个完整的报文！
         std::string package = Decode(inbuffer); // 获取一个完成的遵循协议的报文！
 
-
         // 调试参考输出:
         // std::cout << "Calaculator[func] Decode inbuffer > " << inbuffer << std::endl;
         // std::cout << "Calaculator[func] Decode package > " << package << std::endl;
-        
 
         // 旧版：协议处理方式
 #if 0
@@ -127,7 +124,6 @@ void Calaculator(int sock)
         // 调试参考输出:
         // std::cout << "Calaculator[func] Serialize respTOstring > " << respTOstring << std::endl;
 
-
         // 6. 报文加工【注意需要添加长度信息，形成一个完整报文！】
         respTOstring = EnCode(respTOstring);
 
@@ -154,7 +150,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    // signal(SIGPIPE, handler);
+    // signal(SIGPIPE, handler);（有了守护进程，就可以不在此处使用信号忽略了）
 
     // 捕获信号，查看客户端退出后，服务端跟着退出的bug！
     // 结果为：13 号信号！信号几乎是网络通信中最常见的问题！
@@ -166,12 +162,17 @@ int main(int argc, char *argv[])
     // 一般经验: server在编写的时候，要有较为严谨性的判断逻辑
     // 一般服务器，都是要忽略SIGPIPE信号的，防止在运行中出现非法写入的问题!│
 
+    // 服务启动前，启用进程守护
+    // 说明：在此函数调用后，即启用进程守护，后续不能出现任何的向显示器输出/读入内容（会是程序暂停/终止）
+    // 日志信息的输出，使用自定义的logMessage函数向指定文件写入
+    MyDaemon();
     // 使用智能指针！
     std::unique_ptr<TcpServer> server(new TcpServer(atoi(argv[1])));
 
     // 绑定服务方法
     // server->BandHandler(debug);
     server->BandHandler(Calaculator);
+
     // 启动服务器
     server->Start();
 

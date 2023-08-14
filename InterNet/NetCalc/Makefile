@@ -1,11 +1,11 @@
 .PHONY:all
-all:client server
+all:Cal_client Cal_server
 
-client:cal_client.cc 
+Cal_client:cal_client.cc 
 	g++ -o $@ $^ -std=c++11
-server:cal_server.cc 	
+Cal_server:cal_server.cc 	
 	g++ -o $@ $^ -std=c++11 -lpthread
 
 .PHONY:clean
 clean:
-	rm -f server client
+	rm -f Cal_client Cal_server
