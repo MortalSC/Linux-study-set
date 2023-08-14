@@ -1,0 +1,90 @@
+[NORMAL] [1691999412] create socket success, listensock: 3
+[NORMAL] [1691999412] init server success
+[NORMAL] [1691999946] create socket success, listensock: 3
+[NORMAL] [1691999946] init server success
+[NORMAL] [1692000786] create socket success, listensock: 3
+[NORMAL] [1692000786] init server success
+[NORMAL] [1692002600] create socket success, listensock: 3
+[NORMAL] [1692002600] init server success
+[NORMAL] [1692002719] create socket success, listensock: 3
+[NORMAL] [1692002719] init server success
+[NORMAL] [1692002984] create socket success, listensock: 3
+[NORMAL] [1692002984] init server success
+[NORMAL] [1692003197] create socket success, listensock: 3
+[NORMAL] [1692003197] init server success
+[NORMAL] [1692003268] create socket success, listensock: 3
+[FATAL] [1692003268] bind error, 98:Address already in use
+[NORMAL] [1692003275] create socket success, listensock: 3
+[FATAL] [1692003275] bind error, 98:Address already in use
+[NORMAL] [1692003325] create socket success, listensock: 3
+[NORMAL] [1692003325] init server success
+[NORMAL] [1692003404] create socket success, listensock: 3
+[NORMAL] [1692003404] init server success
+[NORMAL] [1692003493] create socket success, listensock: 3
+[NORMAL] [1692003493] init server success
+[NORMAL] [1692003682] create socket success, listensock: 3
+[NORMAL] [1692003682] init server success
+[NORMAL] [1692003724] create socket success, listensock: 3
+[FATAL] [1692003724] bind error, 98:Address already in use
+[NORMAL] [1692003729] create socket success, listensock: 3
+[FATAL] [1692003729] bind error, 98:Address already in use
+[NORMAL] [1692003742] create socket success, listensock: 3
+[FATAL] [1692003742] bind error, 98:Address already in use
+[NORMAL] [1692003756] create socket success, listensock: 3
+[FATAL] [1692003756] bind error, 98:Address already in use
+[NORMAL] [1692004366] create socket success, listensock: 3
+[NORMAL] [1692004366] init server success
+[NORMAL] [1692004533] create socket success, listensock: 3
+[FATAL] [1692004533] bind error, 98:Address already in use
+[NORMAL] [1692004552] create socket success, listensock: 3
+[FATAL] [1692004552] bind error, 98:Address already in use
+[NORMAL] [1692004712] create socket success, listensock: 3
+[NORMAL] [1692004712] init server success
+[NORMAL] [1692004848] create socket success, listensock: 3
+[FATAL] [1692004848] bind error, 98:Address already in use
+[NORMAL] [1692004911] create socket success, listensock: 3
+[NORMAL] [1692004911] init server success
+[NORMAL] [1692005019] create socket success, listensock: 3
+[FATAL] [1692005019] bind error, 98:Address already in use
+[NORMAL] [1692005415] create socket success, listensock: 3
+[NORMAL] [1692005415] init server success
+[NORMAL] [1692005509] create socket success, listensock: 3
+[FATAL] [1692005509] bind error, 98:Address already in use
+[NORMAL] [1692005516] create socket success, listensock: 3
+[FATAL] [1692005516] bind error, 98:Address already in use
+[NORMAL] [1692005529] create socket success, listensock: 3
+[FATAL] [1692005529] bind error, 98:Address already in use
+[NORMAL] [1692005551] create socket success, listensock: 3
+[FATAL] [1692005551] bind error, 98:Address already in use
+[NORMAL] [1692005574] create socket success, listensock: 3
+[FATAL] [1692005574] bind error, 98:Address already in use
+[NORMAL] [1692005613] create socket success, listensock: 3
+[FATAL] [1692005613] bind error, 98:Address already in use
+[NORMAL] [1692005719] create socket success, listensock: 3
+[NORMAL] [1692005719] init server success
+[NORMAL] [1692005857] create socket success, listensock: 3
+[NORMAL] [1692005857] init server success
+[NORMAL] [1692006042] create socket success, listensock: 3
+[FATAL] [1692006042] bind error, 98:Address already in use
+[NORMAL] [1692006057] create socket success, listensock: 3
+[FATAL] [1692006057] bind error, 98:Address already in use
+[NORMAL] [1692006071] create socket success, listensock: 3
+[FATAL] [1692006071] bind error, 98:Address already in use
+[NORMAL] [1692006107] create socket success, listensock: 3
+[FATAL] [1692006107] bind error, 98:Address already in use
+[NORMAL] [1692006125] create socket success, listensock: 3
+[FATAL] [1692006125] bind error, 98:Address already in use
+[NORMAL] [1692006145] create socket success, listensock: 3
+[FATAL] [1692006145] bind error, 98:Address already in use
+[NORMAL] [1692006176] create socket success, listensock: 3
+[NORMAL] [1692006176] init server success
+[NORMAL] [1692006265] create socket success, listensock: 3
+[FATAL] [1692006265] bind error, 98:Address already in use
+[NORMAL] [1692006279] create socket success, listensock: 3
+[FATAL] [1692006279] bind error, 98:Address already in use
+[NORMAL] [1692006286] create socket success, listensock: 3
+[FATAL] [1692006286] bind error, 98:Address already in use
+[NORMAL] [1692006307] create socket success, listensock: 3
+[NORMAL] [1692006307] init server success
+[NORMAL] [1692006529] create socket success, listensock: 3
+[NORMAL] [1692006529] init server success
