@@ -58,12 +58,35 @@ static Response calculatorHelp(const Request &req)
 // 网络计算器实际功能函数：服务端的业务！
 void Calaculator(int sock)
 {
+    // 优化协议的新增内容”缓冲区“
+    std::string inbuffer;
     while (true)
     {
-        // 1. 数据读取
-        std::string str = Recv(sock); // 在此处读取到（计算）请求
+        // std::cout << "here ?" << std::endl;
+
+        // 1. 数据读取【不在乎读取的内容的多少】
+        // std::string str = Recv(sock, &inbuffer); // 在此处读取到（计算）请求
+        bool res = Recv(sock, &inbuffer);
+        if (!res)
+            break; // 检查数据是否读取成功！
+
+
+
+        // 调试参考输出:
+        // std::cout << "Calaculator[func] read inbuffer > " << inbuffer << std::endl;
 
         // bug 修复点：【读取到的数据可能为空！】
+        // 优化协议的新增要求：一定要保证读取到一个完整的报文！
+        std::string package = Decode(inbuffer); // 获取一个完成的遵循协议的报文！
+
+
+        // 调试参考输出:
+        // std::cout << "Calaculator[func] Decode inbuffer > " << inbuffer << std::endl;
+        // std::cout << "Calaculator[func] Decode package > " << package << std::endl;
+        
+
+        // 旧版：协议处理方式
+#if 0
         if (!str.empty())
         {
 
@@ -80,7 +103,39 @@ void Calaculator(int sock)
             Send(sock, respTOstring);
         }
         else
+        {
             break;
+        }
+#endif
+        // 新版协议处理方式
+        if (package.empty())
+            continue; // 不是一个完整报文，继续读取内容！
+
+        // 生成日志文
+        logMessage(NORMAL, "%s", package.c_str());
+
+        // 到此处，就一定是一个完整的报文！
+        // 2. 创建计算数据管理的结构体
+        Request req;
+        // 3. 反序列化：字节流 => 结构化；
+        req.Deserialized(package);
+        // 4. 业务逻辑【本案例中的数据运算】
+        Response resp = calculatorHelp(req); // 调用计算方法函数进行结果计算
+        // 5. 序列化：回馈结果
+        std::string respTOstring = resp.Serialize();
+
+        // 调试参考输出:
+        // std::cout << "Calaculator[func] Serialize respTOstring > " << respTOstring << std::endl;
+
+
+        // 6. 报文加工【注意需要添加长度信息，形成一个完整报文！】
+        respTOstring = EnCode(respTOstring);
+
+        // 调试参考输出:
+        // std::cout << "Calaculator[func] EnCode respTOstring > " << respTOstring << std::endl;
+
+        // 7. send 在多路转接时再优化！
+        Send(sock, respTOstring);
     }
 }
 
@@ -99,7 +154,7 @@ int main(int argc, char *argv[])
         exit(1);
     }
 
-    //signal(SIGPIPE, handler);
+    // signal(SIGPIPE, handler);
 
     // 捕获信号，查看客户端退出后，服务端跟着退出的bug！
     // 结果为：13 号信号！信号几乎是网络通信中最常见的问题！
@@ -110,7 +165,6 @@ int main(int argc, char *argv[])
     // 一般两种方式都用上，方式一：用于解决对端关闭，本端被os强制关闭！方式二：防止发送中，被关闭！
     // 一般经验: server在编写的时候，要有较为严谨性的判断逻辑
     // 一般服务器，都是要忽略SIGPIPE信号的，防止在运行中出现非法写入的问题!│
-
 
     // 使用智能指针！
     std::unique_ptr<TcpServer> server(new TcpServer(atoi(argv[1])));

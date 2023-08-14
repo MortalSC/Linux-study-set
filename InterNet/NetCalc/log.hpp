@@ -21,7 +21,7 @@ const char *gLevelMap[] = {
     "FATAL"
 };
 
-#define LOGFILE "./threadpool.log"
+#define LOGFILE "./calculator.log"
 
 // 完整的日志功能，至少: 日志等级 时间 支持用户自定义(日志内容, 文件行，文件名)
 void logMessage(int level, const char *format, ...)
@@ -46,8 +46,8 @@ void logMessage(int level, const char *format, ...)
     vsnprintf(logBuffer, sizeof logBuffer, format, args);
     va_end(args);
 
-    // FILE *fp = fopen(LOGFILE, "a");
-    printf("%s%s\n", stdBuffer, logBuffer);
-    // fprintf(fp, "%s%s\n", stdBuffer, logBuffer);
-    // fclose(fp);
+    FILE *fp = fopen(LOGFILE, "a");
+    // printf("%s%s\n", stdBuffer, logBuffer);
+    fprintf(fp, "%s%s\n", stdBuffer, logBuffer);
+    fclose(fp);
 }
