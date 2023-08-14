@@ -8,9 +8,12 @@
 #include <string>
 #include <cstring>
 
+#include <jsoncpp/json/json.h>
+
+
 namespace ns_protocol
 {
-#define MYSELF 1
+// #define MYSELF 1                 // 取消使用自定义的序列化与反序列化，使用现成的 json
 #define SPACE " " // 空格
 #define SPACE_LEN strlen(SPACE)
 
@@ -34,7 +37,9 @@ namespace ns_protocol
         // 提问：你怎么保证规定长度后，你能正确的读取报文长数据内容？如果内容中含有\r\n呢？
         // 答：使用 length 标识的报文的长度，若在长都范围内出现 \r\n 即表示：\r\n 是数据内容的一部分！
         // 超出 \r\n 后的 \r\n 才是报文结束的标识！
-        // 2. 使用线程的方案
+
+
+        // 2. 使用现成的方案
 
         // 序列化：功能：将下面的三个数据转成字符串
         std::string Serialize()
@@ -48,7 +53,14 @@ namespace ns_protocol
             str += std::to_string(_y);
             return str;
 #else
-            std::cout << "TODO" << std::endl;
+            // std::cout << "TODO" << std::endl;
+
+            Json::Value root;               // 定义一个万能对象，可以用于保存
+            root["_x"] = _x;
+            root["_y"] = _y;
+            root["_op"] = _op;
+            Json::FastWriter writer;
+            return writer.write(root);
 
 #endif
         }
@@ -71,7 +83,15 @@ namespace ns_protocol
             _op = package[left + SPACE_LEN];
             return true;
 #else
-            std::cout << "TODO" << std::endl;
+            // std::cout << "TODO" << std::endl;
+
+            Json::Value root;
+            Json::Reader reader;
+            reader.parse(package, root);
+            _x = root["_x"].asInt();
+            _y = root["_y"].asInt();
+            _op = root["_op"].asInt();
+            return true;
 
 #endif
         }
@@ -107,7 +127,12 @@ namespace ns_protocol
             str += std::to_string(_result);
             return str;
 #else
-            std::cout << "TODO" << std::endl;
+            // std::cout << "TODO" << std::endl;
+            Json::Value root;
+            root["_code"] = _code;
+            root["_result"] = _result;
+            Json::FastWriter writer;
+            return writer.write(root);
 
 #endif
         }
@@ -126,8 +151,13 @@ namespace ns_protocol
             _result = atoi(package.substr(pos + SPACE_LEN).c_str());
             return true;
 #else
-            std::cout << "TODO" << std::endl;
-
+            // std::cout << "TODO" << std::endl;
+            Json::Value root;
+            Json::Reader reader;
+            reader.parse(package, root);
+            _code = root["_code"].asInt();
+            _result = root["_result"].asInt();
+            return true;
 #endif
         }
 
@@ -196,12 +226,12 @@ namespace ns_protocol
         }
         else if (s == 0)
         {
-            std::cout << "client quit！" << std::endl;
+            // std::cout << "client quit！" << std::endl;
             return false;
         }
         else
         {
-            std::cout << "recv error！" << std::endl;
+            // std::cout << "recv error！" << std::endl;
             return false;
         }
         return true;
@@ -210,7 +240,7 @@ namespace ns_protocol
     // 在协议中规定数据在网络中发送的方式【临时版】
     void Send(int sock, const std::string str)
     {
-        std::cout << "send in" << std::endl;
+        // std::cout << "send in" << std::endl;
         int n = send(sock, str.c_str(), str.size(), 0);
         if (n < 0)
             std::cout << "send error！" << std::endl;
