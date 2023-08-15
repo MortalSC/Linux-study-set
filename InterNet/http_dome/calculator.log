@@ -88,3 +88,41 @@
 [NORMAL] [1692006307] init server success
 [NORMAL] [1692006529] create socket success, listensock: 3
 [NORMAL] [1692006529] init server success
+[NORMAL] [1692059806] create socket success, listensock: 3
+[NORMAL] [1692059806] init server success
+[NORMAL] [1692060783] create socket success, listensock: 3
+[FATAL] [1692060783] bind error, 98:Address already in use
+[NORMAL] [1692060794] create socket success, listensock: 3
+[FATAL] [1692060794] bind error, 98:Address already in use
+[NORMAL] [1692060800] create socket success, listensock: 3
+[FATAL] [1692060800] bind error, 98:Address already in use
+[NORMAL] [1692060822] create socket success, listensock: 3
+[FATAL] [1692060822] bind error, 98:Address already in use
+[NORMAL] [1692061018] create socket success, listensock: 3
+[NORMAL] [1692061018] init server success
+[NORMAL] [1692064827] create socket success, listensock: 3
+[FATAL] [1692064827] bind error, 98:Address already in use
+[NORMAL] [1692064830] create socket success, listensock: 3
+[FATAL] [1692064830] bind error, 98:Address already in use
+[NORMAL] [1692064831] create socket success, listensock: 3
+[FATAL] [1692064831] bind error, 98:Address already in use
+[NORMAL] [1692064831] create socket success, listensock: 3
+[FATAL] [1692064831] bind error, 98:Address already in use
+[NORMAL] [1692064832] create socket success, listensock: 3
+[FATAL] [1692064832] bind error, 98:Address already in use
+[NORMAL] [1692064833] create socket success, listensock: 3
+[FATAL] [1692064833] bind error, 98:Address already in use
+[NORMAL] [1692064851] create socket success, listensock: 3
+[FATAL] [1692064851] bind error, 98:Address already in use
+[NORMAL] [1692064854] create socket success, listensock: 3
+[FATAL] [1692064854] bind error, 98:Address already in use
+[NORMAL] [1692064867] create socket success, listensock: 3
+[NORMAL] [1692064867] init server success
+[NORMAL] [1692065037] create socket success, listensock: 3
+[FATAL] [1692065037] bind error, 98:Address already in use
+[NORMAL] [1692065061] create socket success, listensock: 3
+[NORMAL] [1692065061] init server success
+[NORMAL] [1692065178] create socket success, listensock: 3
+[NORMAL] [1692065178] init server success
+[NORMAL] [1692065202] create socket success, listensock: 3
+[NORMAL] [1692065202] init server success

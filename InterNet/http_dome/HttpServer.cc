@@ -45,9 +45,9 @@ void HandlerHttpRequest(int sockfd)
     std::vector<std::string> vline;
     Util::cutString(buffer, "\n", &vline);
     // 测试容器内的内容
-    for(auto & e: vline){
-        std::cout << e << "\n" <<  std::endl;
-    }
+    // for(auto & e: vline){
+    //     std::cout << e << "\n" <<  std::endl;
+    // }
 
     std::vector<std::string> vblock;
     Util::cutString(vline[0], " ", &vblock); // 获取第一行的三个数据：请求方法、访问的资源目录、协议版本号
@@ -62,7 +62,7 @@ void HandlerHttpRequest(int sockfd)
     // std::string target = ROOT;
     // target += vblock[1];
 
-    std::cout << target << std::endl;
+    // std::cout << target << std::endl;
 
     // 去打开文件
     // int fd = open(target.c_str(), O_RDONLY);        // 只读的方式打开
@@ -87,8 +87,28 @@ void HandlerHttpRequest(int sockfd)
 
     // 尝试返回响应：
     std::string HttpResponse;
-    if(content.empty()) HttpResponse = "HTTP/1.1 404 NotFound\r\n";
-    else HttpResponse = "HTTP/1.1 200 OK\r\n";
+    // if(content.empty()) HttpResponse = "HTTP/1.1 404 NotFound\r\n";
+
+    // 实验二：探索 3XX 状态码的重定向
+    if(content.empty()){
+         HttpResponse = "HTTP/1.1 302 Found\r\n";           
+         // 如果当获取的链接为空时，模拟资源地址更新，此时应当向客户端反馈新的地址
+        //  HttpResponse += "location :https://www.baidu.com\r\n";      // 仅测试，若我们的资源转移了，让用户重定向访问：百度 
+         HttpResponse += "location: http://159.75.137.190:8080/a/b/404.html\r\n";      
+        // 仅测试，若我们的资源转移了，让用户重定向访问：我们自己的目录：回显：404资源不存在！ 
+
+    }
+    else {
+        // 实验三：探索 header 中的常用属性
+        HttpResponse = "HTTP/1.1 200 OK\r\n";
+        // 上面的：location，是重定向地址属性
+        // Content-Type：资源的类型【类型是使用后缀来区分的！】 / 现在的【多数】浏览器：都可以自动推断类型
+        HttpResponse += ("Content-Type:text/html\r\n" );      // text/html：是简单文本属性
+
+        // Content-Length：正文长度属性
+        HttpResponse += ("Content-Length:" +std::to_string(content.size()) + "\r\n" );      
+        // 
+    }
     HttpResponse += "\r\n";
     HttpResponse += content;
 
